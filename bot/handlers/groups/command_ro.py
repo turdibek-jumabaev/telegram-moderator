@@ -3,10 +3,11 @@ import re
 import asyncio
 from loader import bot
 from telebot.types import Message
-from telebot.asyncio_filters import TextStartsFilter
+from telebot.asyncio_filters import TextStartsFilter, TextMatchFilter
 import filters
 
 
+@bot.message_handler(is_admin=True, commands=['ro'])
 @bot.message_handler(is_admin=True, text_startswith="!ro")
 async def command_ro(message: Message):
     if message.reply_to_message:
@@ -38,6 +39,7 @@ async def command_ro(message: Message):
         await bot.delete_message(chat_id=message.chat.id, message_id=msg.message_id)
 
 
+@bot.message_handler(is_admin=True, commands=['unro'])
 @bot.message_handler(is_admin=True, text_startswith="!unro")
 async def command_unro(message: Message):
     if message.reply_to_message:
@@ -58,5 +60,11 @@ async def command_unro(message: Message):
         await bot.delete_message(chat_id=message.chat.id, message_id=message.message_id)
         await bot.delete_message(chat_id=message.chat.id, message_id=msg.message_id)
 
+
+@bot.message_handler(commands=['ro', 'unro'], text=["!ro", "!unro"])
+async def command_ro_help(message: Message):
+    await bot.delete_message(chat_id=message.chat.id, message_id=message.message_id)
+
 bot.add_custom_filter(filters.is_admin_filter.IsAdminFilter())
 bot.add_custom_filter(TextStartsFilter())
+bot.add_custom_filter(TextMatchFilter())
