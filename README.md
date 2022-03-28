@@ -10,8 +10,8 @@
 `/ban` `!ban` - ban berish
 
 ## Qo'shilishi kerak
-`1` kanal nomidan yozishni taqiqlash <br>
-`2` username bilan cheklash
++ kanal nomidan yozishni taqiqlash <br>
++ username bilan cheklash
 
 # Dasturchi
 Turdibek Jumabaev 28.03.2022 ©️
